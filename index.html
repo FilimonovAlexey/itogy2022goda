@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru" >
+<head>
+  <meta charset="UTF-8">
+  <title>Итоги года</title>
+  <!-- подключаем стили -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<!-- создаём vue-приложение -->
+<main class="app" v-scope="app()">
+  <!-- блок с результатами -->
+  <div class="app-display">
+    <!-- заголовок -->
+    <h2>{{title}}</h2>
+    <!-- блок с показателями года -->
+    <div class="metric-group">
+      <!-- блок с кругляшами -->
+      <div class="metric" v-for="metric in metrics">
+        <!-- рисуем кругляш -->
+        <div class="circle-chart" :style="{ '--selected-color': `var(--${color(metric.pct)}` }">
+          <!-- задаём положение круга -->
+          <svg viewBox="0 0 36 36">
+            <!-- задаём фон -->
+            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <!-- и рисуем сам круг -->
+            <path class="circle" :stroke-dasharray="`${metric.pct}, 100`" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          </svg>
+          <!-- добавляем показатели процентов -->
+          <div class="percentage">{{metric.pct}}</div>
+        </div>
+        <!-- и надпись под кругом -->
+        <div class="label">{{metric.title}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- блок с исходными данными -->
+  <div class="app-editor">
+    <h2>Подводим итоги года</h2>
+    <!-- поле ввода, в котором можно менять общий заголовок показателей -->
+    <input type="text" v-model="title">
+    <div class="edit-metrics">
+      <!-- создаём поля ввода для показателей -->
+      <div class="edit" v-for="metric in metrics">
+        <!-- подпись и процент выполнения -->
+        <input type="text" v-model="metric.title">
+        <input type="number" v-model="metric.pct">
+      </div>
+    </div>
+  </div>
+</main>
+  <!-- подключаем скрипт как модуль -->
+  <script type="module" src="./script.js"></script>
+
+</body>
+</html>

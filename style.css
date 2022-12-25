@@ -1,0 +1,137 @@
+/* глобальные переменные */
+:root {
+    --light:#F5F5F5;
+    --dark:#212121;
+    --brown:#372F25;
+    --red:#FD3E3E;
+    --orange:#FFAA48;
+    --green:#27C86D;
+  }
+  
+  /* будем задавать размеры не контента, а блока, в котором он лежит */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* настройки всей страницы — отступы, фон и текст */
+  body {
+  
+    margin: 0;
+    background-color: var(--dark);
+    color: var(--light);
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  /* общие настройки приложения */
+  .app {
+  /* выравнивание по центру, включаем сетку и располагаем элементы на всю высоту окна */
+    text-align: center;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+  }
+  
+  /* включаем гибкую вёрстку в контейнерах */
+  .metric-group {
+    display: flex;
+  }
+  
+  /* общие настройки каждого кругляша с результатами */
+  .metric {
+  /* отступ */
+    margin: 10px;
+  /* максимальная высота */
+    max-width: 90px;
+  /* используем сетку */
+    display: grid;
+    gap: 16px;
+  /* располагаем всё по центру */
+    place-items: center;
+  }
+  
+  /* настройки подписей */
+  .metric .label {
+  /* задаём размер шрифта */
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  
+  /* настройки круговой диаграммы */
+  .circle-chart {
+  /* используем выбранный цвет */
+    --selected-color: var(--green);
+    color: var(--selected-color);
+  /* ширина диаграммы */
+    width: 75px;
+  /* располагаем элементы в сетке по центру */
+    display: grid;
+    place-items: center;
+  }
+  
+  /* настраиваем порядок вывода результатов */
+  .circle-chart > * {
+    grid-column: 1/-1;
+    grid-row: 1/-1;
+  }
+  
+  /* настраиваем фон кругляша */
+  .circle-chart .circle-bg {
+    fill: var(--brown);
+    stroke: var(--brown);
+  /* толщина границы */
+    stroke-width: 2.8;
+  }
+  
+  /* настраиваем анимацию заполнения кругляша */
+  .circle-chart .circle {
+    fill: none;
+  /* используем выбранный цвет */
+    stroke: var(--selected-color);
+  /* толщина обводки */
+    stroke-width: 2.8;
+    stroke-linecap: round;
+  /* вид и направление анимации */
+    animation: progress 1.2s ease-in-out forwards;
+  }
+  
+  /* настройки внутреннего текста с процентами */
+  .circle-chart .percentage {
+  /* устанавливаем шрифт и его размер */
+    font-family: Monaco, monospace;
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+  
+  
+  /* настройки блока редактирования параметров */
+  .app-editor {
+  /* выравниваем элементы по вертикальной оси */
+    align-self: end;
+  /* отступы между ними */
+    margin-bottom: 50px;
+  }
+  
+  
+  /* раскадровка анимации */
+  @keyframes progress {
+    0% {
+  /* просто рисуем обводку кругляша */
+      stroke-dasharray: 0 100;
+    }
+  }
+  
+  /* настройки полей ввода */
+  input {
+  /* размер шрифта */
+    font-size: 1.2rem;
+    font-weight: 700;
+  /* внутренний отступ */
+    padding: 12px;
+  /* используем глобальные цвета для фона и цвета текста */
+    background-color: var(--brown);
+    color: var(--light);
+  /* убираем границу */
+    border: none;
+  /* внешний отступ */
+    margin: 5px 2px;
+  }
